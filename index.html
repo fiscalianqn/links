@@ -448,6 +448,12 @@
         }
 
         window.addEventListener('load', sortCardsAlphabetically);
+
+        document.getElementById('download-proxy').addEventListener('click', (event) => {
+            if (!confirm('¿Desea descargar el archivo cambia-proxy.vbs?')) {
+                event.preventDefault();
+            }
+        });
     </script>
 </body>
 </html>
