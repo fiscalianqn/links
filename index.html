@@ -1,500 +1,637 @@
-<html><head><base href="https://fiscalianqn.github.io/links/" />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<base href="https://fiscalianqn.github.io/links/" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fiscalía de Estado de Neuquén</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+/* =====================================================================
+   LISTA DE ACCESOS
+   Para agregar uno nuevo, copiá una línea y cambiá los datos.
+   - nombre: texto de la tarjeta
+   - url:    dirección completa
+   - icono:  uno de: doc, maletin, recibo, calculadora, reloj, mapa, candado,
+             lupa, correo, pdf, persona, sueldo, ingresar, capas, casa,
+             escudo, mundo, peso, chat, descarga, birrete, balanza
+   - descarga: true solo si el link descarga un archivo
+   El orden no importa: la página los ordena alfabéticamente sola.
+   ===================================================================== */
+const ACCESOS = [
+  { nombre: "COLEGIO DE ABOGADOS – TASAS", url: "https://abognqn.org/tasas-y-aportes/", icono: "maletin" },
+  { nombre: "ARCA (EX AFIP) – CONSTANCIA", url: "https://seti.afip.gob.ar/padron-puc-constancia-internet/ConsultaConstanciaAction.do", icono: "recibo" },
+  { nombre: "CALCULO INTERESES RENTA", url: "https://rentasneuquenweb.gob.ar/nqn/SCF/cal_interes.php", icono: "calculadora" },
+  { nombre: "CALCULO DE INTERESES", url: "https://cintereses.agjusneuquen.gob.ar/", icono: "reloj" },
+  { nombre: "CATASTRO", url: "https://catastro.neuquen.gov.ar/portal/apps/webappviewer/index.html?id=63f0c3f9a047425280951f418621171f", icono: "mapa" },
+  { nombre: "CPM (CONSULTA DATOS)", url: "https://cpm.sintys.gob.ar/Inicio/login", icono: "candado" },
+  { nombre: "DEXTRA CONSULTA", url: "https://consultadextra.jusneuquen.gov.ar/", icono: "lupa" },
+  { nombre: "GDE", url: "https://gde.neuquen.gov.ar/", icono: "doc" },
+  { nombre: "GMAIL", url: "https://www.google.com/intl/es-419/gmail/about/", icono: "correo" },
+  { nombre: "I LOVE PDF", url: "https://www.ilovepdf.com/es", icono: "pdf" },
+  { nombre: "MINOSIS", url: "https://mi.nosis.com/", icono: "persona" },
+  { nombre: "MIS LICENCIAS Y RECIBOS DE SUELDOS", url: "https://mislicencias.economianqn.gob.ar/#/auth/login", icono: "sueldo" },
+  { nombre: "ONE LOGIN", url: "https://cas.neuquen.gov.ar/cas/login?service=https%3a%2f%2flogin.neuquen.gov.ar%2f", icono: "ingresar" },
+  { nombre: "PODER JUDICIAL DE LA NACION", url: "https://pjn.gov.ar", icono: "capas" },
+  { nombre: "REGISTRO DE LA PROPIEDAD INMUEBLE", url: "https://www.jusneuquen.gov.ar/rpi/", icono: "casa" },
+  { nombre: "RIESGO ON LINE", url: "https://www.riesgoonline.com/#/home", icono: "escudo" },
+  { nombre: "SINATRA", url: "https://rentasneuquenweb.gob.ar/nqn/Extranet/index.php", icono: "mundo" },
+  { nombre: "SISTEMA SISCOM", url: "https://exd.jusneuquen.gov.ar/", icono: "doc" },
+  { nombre: "TASAS PODER JUDICIAL", url: "https://pagodetasas.jusneuquen.gov.ar/tasasJusticia", icono: "peso" },
+  { nombre: "WEBMAIL", url: "https://correo.neuquen.gov.ar/", icono: "correo" },
+  { nombre: "WHATSAPP GUIDO ALVEZ", url: "https://wa.me/5492995201234", icono: "chat" },
+  { nombre: "WHATSAPP MARCELO SPIRAGLIA", url: "https://wa.me/5492995216023", icono: "chat" },
+  { nombre: "WHATSAPP WEB", url: "https://web.whatsapp.com/", icono: "chat" },
+  { nombre: "LEYES Y DECRETO", url: "https://boficial.neuquen.gov.ar/Legisneu", icono: "balanza" },
+  { nombre: "INFOLEG", url: "https://www.infoleg.gob.ar", icono: "balanza" },
+  { nombre: "CAMBIADOR DE PROXYS", url: "https://fiscalianqn.github.io/links/cambia-proxy.vbs", icono: "descarga", descarga: true },
+  { nombre: "WE TRANSFER", url: "https://wetransfer.com", icono: "descarga" },
+  { nombre: "CAPACITACION", url: "https://capacitacion.neuquen.gov.ar/", icono: "birrete" },
+];
+</script>
+
+<script>
+  // Aplica el tema guardado antes de pintar, para evitar parpadeo
+  try {
+    const t = localStorage.getItem("fe-tema");
+    if (t === "claro" || t === "oscuro") document.documentElement.dataset.theme = t === "claro" ? "light" : "dark";
+  } catch (e) {}
+</script>
+
 <style>
-    :root {
-        --primary-color: #3498db;
-        --secondary-color: #2c3e50;
-        --background-color: #FCF2DC;
-        --card-background: #F4DFB9;
-        --text-color: #333333;
+  :root {
+    --bg: #F5F1E8;
+    --surface: #FFFDF8;
+    --surface-2: #EFE8D8;
+    --ink: #1B2731;
+    --ink-soft: #5B6670;
+    --line: #E3DBC8;
+    --brand: #2B3E4C;
+    --brand-ink: #F4DFB9;
+    --accent: #4F8A2F;
+    --accent-soft: #E3EED8;
+    --star: #C98A12;
+    --focus: #2F6FB0;
+    --shadow: 0 1px 2px rgba(27, 39, 49, .06), 0 4px 14px rgba(27, 39, 49, .06);
+    --shadow-hover: 0 2px 4px rgba(27, 39, 49, .08), 0 12px 28px rgba(27, 39, 49, .12);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10161B;
+      --surface: #18212A;
+      --surface-2: #222D37;
+      --ink: #E9EEF2;
+      --ink-soft: #95A3AF;
+      --line: #2A3641;
+      --brand: #0B1116;
+      --brand-ink: #F4DFB9;
+      --accent: #8CC46A;
+      --accent-soft: #23331C;
+      --star: #F0B53C;
+      --focus: #6FA8E0;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3);
+      --shadow-hover: 0 10px 28px rgba(0, 0, 0, .45);
+      color-scheme: dark;
     }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10161B;
+    --surface: #18212A;
+    --surface-2: #222D37;
+    --ink: #E9EEF2;
+    --ink-soft: #95A3AF;
+    --line: #2A3641;
+    --brand: #0B1116;
+    --brand-ink: #F4DFB9;
+    --accent: #8CC46A;
+    --accent-soft: #23331C;
+    --star: #F0B53C;
+    --focus: #6FA8E0;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    --shadow-hover: 0 10px 28px rgba(0, 0, 0, .45);
+    color-scheme: dark;
+  }
 
-    body {
-        font-family: 'Roboto', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: var(--background-color);
-        color: var(--text-color);
-        line-height: 1.6;
-    }
+  * { box-sizing: border-box; }
 
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-    }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    header {
-        display: flex;
-        flex-direction: column;
-        height: 150px; /* Reduced from 200px */
-    }
+  .wrap {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
-    .header-top {
-        background-color: #2B3E4C;
-        height: 62%; /* Increased from 50% */
-        display: flex;
-        align-items: center;
-        padding-left: 15px; /* Changed from 20px to 70px */
-    }
+  /* ---------- Encabezado ---------- */
+  header {
+    background: var(--brand);
+    color: var(--brand-ink);
+    position: relative;
+    padding: 22px 0 50px;
+  }
+  header::after {
+    /* franja verde institucional */
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 4px;
+    background: #87B867;
+  }
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .logo {
+    height: 64px;
+    width: auto;
+    max-width: 60vw;
+    object-fit: contain;
+    display: block;
+  }
+  .title {
+    margin: 40px 0 0;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(22px, 2.4vw, 27px);
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+  .subtitle {
+    margin: 2px 0 0;
+    font-size: 14px;
+    opacity: .65;
+  }
 
-    .header-bottom {
-        background-color: #87b867;
-        height: 33.33%; /* Reduced from 50% */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  /* Selector de tema */
+  .theme {
+    display: inline-flex;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 999px;
+    padding: 3px;
+    flex-shrink: 0;
+  }
+  .theme button {
+    font: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--brand-ink);
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    padding: 6px 12px;
+    cursor: pointer;
+    opacity: .7;
+    transition: background-color .15s, opacity .15s;
+  }
+  .theme button:hover { opacity: 1; }
+  .theme button[aria-pressed="true"] {
+    background: var(--brand-ink);
+    color: var(--brand);
+    opacity: 1;
+  }
 
-    .header-logo {
-        max-height: 80%;
-        max-width: 600px;
-        width: 600px;
-        height: 114px;
-        object-fit: contain;
-    }
+  /* ---------- Buscador ---------- */
+  .search {
+    position: relative;
+    margin-top: -30px;
+    z-index: 1;
+  }
+  .search svg {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translateY(-50%);
+    color: var(--ink-soft);
+    pointer-events: none;
+  }
+  .search input {
+    width: 100%;
+    height: 60px;
+    padding: 0 64px 0 54px;
+    font: inherit;
+    font-size: 17px;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow-hover);
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .search input::placeholder { color: var(--ink-soft); }
+  .search input:focus {
+    border-color: var(--focus);
+    box-shadow: var(--shadow-hover), 0 0 0 4px color-mix(in srgb, var(--focus) 20%, transparent);
+  }
+  .search input::-webkit-search-cancel-button { display: none; }
+  .kbd {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: 6px;
+    padding: 1px 8px;
+    pointer-events: none;
+  }
+  .hint {
+    margin: 10px 4px 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+    min-height: 20px;
+  }
 
-    header h1 {
-        color: #F4DFB9;
-        text-align: center;
-        font-size: 20px; /* Reduced from 24px to maintain proportions */
-        font-weight: 700;
-        letter-spacing: 1px;
-        margin: 0;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    }
+  /* ---------- Secciones ---------- */
+  main.wrap { flex: 1; padding-bottom: 56px; }
+  section { margin-top: 32px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0 0 14px;
+  }
+  .section-head h2 {
+    margin: 0;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -.005em;
+  }
+  .count {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  [hidden] { display: none !important; }
 
-    .toggle-container {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 20px;
-    }
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
 
-    .toggle-btn {
-        background-color: var(--card-background);
-        color: var(--text-color);
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+  /* ---------- Tarjetas ---------- */
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  }
+  .card a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 44px 14px 14px;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 12px;
+    min-height: 72px;
+  }
+  .card a:focus-visible,
+  .star:focus-visible,
+  .theme button:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .card.first a {
+    box-shadow: inset 0 0 0 2px var(--focus);
+  }
+  .icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: var(--accent-soft);
+    color: var(--accent);
+    transition: transform .18s ease;
+  }
+  .card:hover .icon { transform: scale(1.06); }
+  .icon svg { width: 22px; height: 22px; }
+  .text { min-width: 0; }
+  .name {
+    display: block;
+    font-weight: 600;
+    font-size: 13.5px;
+    letter-spacing: .015em;
+    line-height: 1.3;
+  }
+  .domain {
+    display: block;
+    margin-top: 3px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tag {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 0 6px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    vertical-align: 1px;
+  }
+  mark {
+    background: color-mix(in srgb, var(--star) 30%, transparent);
+    color: inherit;
+    border-radius: 2px;
+  }
 
-    footer {
-        background-color: var(--secondary-color);
-        color: #F4DFB9;
-        text-align: center;
-        padding: 1rem;
-        margin-top: 2rem;
-    }
+  /* Estrella de favorito */
+  .star {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .15s, color .15s, background-color .15s;
+  }
+  .star svg { width: 18px; height: 18px; }
+  .card:hover .star,
+  .star:focus-visible,
+  .star[aria-pressed="true"] { opacity: 1; }
+  .star:hover { background: var(--surface-2); color: var(--star); }
+  .star[aria-pressed="true"] { color: var(--star); }
+  .star[aria-pressed="true"] svg { fill: currentColor; }
+  @media (hover: none) { .star { opacity: .55; } }
 
-    footer p {
-        margin: 0;
-    }
+  .empty {
+    padding: 40px 16px;
+    text-align: center;
+    color: var(--ink-soft);
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+  }
 
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(6, minmax(160px, 1fr));
-        gap: 24px;
-        padding: 32px 0;
-    }
+  /* ---------- Pie ---------- */
+  footer {
+    background: var(--brand);
+    color: var(--brand-ink);
+    font-size: 13px;
+    padding: 18px 0;
+  }
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  footer span { opacity: .75; }
 
-    .card {
-        background-color: var(--card-background);
-        border-radius: 10px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        overflow: hidden;
-    }
+  @media (max-width: 600px) {
+    .wrap { padding: 0 16px; }
+    header { padding: 16px 0 46px; }
+    .logo { height: 40px; max-width: 100%; }
+    .title { margin-top: 28px; }
+    .theme button { padding: 5px 9px; }
+    .kbd { display: none; }
+    .search input { height: 54px; padding-right: 16px; font-size: 16px; }
+    .grid { grid-template-columns: 1fr; gap: 10px; }
+  }
 
-    .card a {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 24px;
-        text-decoration: none;
-        color: var(--secondary-color);
-        font-weight: 500;
-        font-size: 14px;
-        transition: background-color 0.3s ease;
-        text-align: center;
-    }
-
-    .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .card a:hover {
-        background-color: rgba(52, 152, 219, 0.1);
-    }
-
-    .card svg {
-        display: block;
-        margin-bottom: 16px;
-        width: 48px;
-        height: 48px;
-        transition: transform 0.3s ease;
-    }
-
-    .card:hover svg {
-        transform: scale(1.1);
-    }
-
-    @media (max-width: 1200px) {
-        .grid {
-            grid-template-columns: repeat(4, minmax(140px, 1fr));
-        }
-    }
-
-    @media (max-width: 900px) {
-        .grid {
-            grid-template-columns: repeat(3, minmax(120px, 1fr));
-        }
-    }
-
-    @media (max-width: 600px) {
-        .grid {
-            grid-template-columns: repeat(2, minmax(140px, 1fr));
-        }
-    }
-
-    body.dark-mode {
-        --background-color: #1a1a1a;
-        --card-background: #2c2c2c;
-        --text-color: #ffffff;
-    }
-
-    body.dark-mode .card a {
-        color: #ffffff;
-    }
-
-    body.dark-mode .card svg {
-        stroke: #ffffff;
-    }
-
-    body.dark-mode .toggle-btn {
-        background-color: #3498db;
-        color: #ffffff;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
 </style>
 </head>
 <body>
-    <header>
-        <div class="header-top">
-            <img src="https://optic.neuquen.gov.ar/wp-content/uploads/2024/01/cropped-nqn-claro-sin-fondo.png" alt="Fiscalía de Estado de Neuquén logo" class="header-logo">
+  <header>
+    <div class="wrap">
+      <div class="header-row">
+        <img src="https://optic.neuquen.gov.ar/wp-content/uploads/2024/01/cropped-nqn-claro-sin-fondo.png" alt="Gobierno de la Provincia del Neuquén" class="logo">
+        <div class="theme" role="group" aria-label="Tema de colores">
+          <button type="button" data-tema="auto">Auto</button>
+          <button type="button" data-tema="claro">Claro</button>
+          <button type="button" data-tema="oscuro">Oscuro</button>
         </div>
-        <div class="header-bottom">
-            <h1>Fiscalía de Estado de Neuquén</h1>
-        </div>
-    </header>
-    <div class="container">
-        <div class="toggle-container">
-            <button id="dark-mode-toggle" class="toggle-btn">Cambiar modo oscuro</button>
-        </div>
-        <div class="grid">
-            <div class="card">
-                <a href="https://abognqn.org/tasas-y-aportes/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                        <path d="M12 11h.01"/>
-                        <path d="M12 15h.01"/>
-                        <path d="M12 19h.01"/>
-                    </svg>
-                    COLEGIO DE ABOGADOS – TASAS
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://seti.afip.gob.ar/padron-puc-constancia-internet/ConsultaConstanciaAction.do" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                    AFIP
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://rentasneuquenweb.gob.ar/nqn/SCF/cal_interes.php" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                    </svg>
-                    CALCULO INTERESES RENTA
-                </a>
-            </div>
-            <div class="card">
-                <a href="http://cintereses.agjusneuquen.gob.ar/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                    CALCULO DE INTERESES
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://catastro.neuquen.gov.ar/portal/apps/webappviewer/index.html?id=63f0c3f9a047425280951f418621171f" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                    CATASTRO
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://cpm.sintys.gob.ar/Inicio/login" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                    CPM (CONSULTA DATOS)
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://consultadextra.jusneuquen.gov.ar/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"/>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                    </svg>
-                    DEXTRA CONSULTA
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://gde.neuquen.gov.ar/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                    GDE
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://www.google.com/intl/es-419/gmail/about/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    GMAIL
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://www.ilovepdf.com/es" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <path d="M12 18v-6"/>
-                        <path d="M9 15h6"/>
-                    </svg>
-                    I LOVE PDF
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://mi.nosis.com/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    MINOSIS
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://mislicencias.economianqn.gob.ar/#/auth/login" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                    </svg>
-                    MIS LICENCIAS Y RECIBOS DE SUELDOS
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://cas.neuquen.gov.ar/cas/login?service=https%3a%2f%2flogin.neuquen.gov.ar%2f" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                        <polyline points="10 17 15 12 10 7"/>
-                        <line x1="15" y1="12" x2="3" y2="12"/>
-                    </svg>
-                    ONE LOGIN
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://old.pjn.gov.ar/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
-                    PODER JUDICIAL DE LA NACION
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://www.jusneuquen.gov.ar/rpi/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                        <polyline points="9 22 9 12 15 12 15 22"/>
-                    </svg>
-                    REGISTRO DE LA PROPIEDAD INMUEBLE
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://www.riesgoonline.com/#/home" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
-                    RIESGO ON LINE
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://rentasneuquenweb.gob.ar/nqn/Extranet/index.php" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="2" y1="12" x2="22" y2="12"/>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    </svg>
-                    SINATRA
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://exd.jusneuquen.gov.ar/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                    SISTEMA SISCOM
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://pagodetasas.jusneuquen.gov.ar/tasasJusticia" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="1" x2="12" y2="23"/>
-                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                    </svg>
-                    TASAS PODER JUDICIAL
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://correo.neuquen.gov.ar/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    WEBMAIL
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://wa.me/5492995201234" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                    </svg>
-                    WHATSAPP GUIDO ALVEZ
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://wa.me/5492995216023" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                    </svg>
-                    WHATSAPP MARCELO SPIRAGLIA
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                    </svg>
-                    WHATSAPP WEB
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://boficial.neuquen.gov.ar/Legisneu" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                    LEYES Y DECRETO
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://www.infoleg.gob.ar" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                    INFOLEG
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://fiscalianqn.github.io/links/cambia-proxy.vbs" download target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="7 10 12 15 17 10"/>
-                        <line x1="12" y1="15" x2="12" y2="3"/>
-                    </svg>
-                    CAMBIADOR DE PROXYS
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://wetransfer.com" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="7 10 12 15 17 10"/>
-                        <line x1="12" y1="15" x2="12" y2="3"/>
-                    </svg>
-                    WE TRANSFER
-                </a>
-            </div>
-            <div class="card">
-                <a href="https://capacitacion.neuquen.gov.ar/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 14l9-5-9-5-9 5 9 5z"/>
-                        <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
-                        <path d="M12 14l-6.16-3.422a12.083 12.083 0 00-.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 006.824-2.998 12.078 12.078 0 00-.665-6.479L12 14z"/>
-                    </svg>
-                    CAPACITACION
-                </a>
-            </div>
-        </div>
+      </div>
+      <h1 class="title">Fiscalía de Estado de Neuquén</h1>
+      <p class="subtitle">Accesos rápidos a sistemas y servicios</p>
     </div>
+  </header>
 
-    <footer>
-        <p>Desarrollo Informática de Fiscalía de Estado de Neuquén</p>
-    </footer>
+  <main class="wrap">
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.2" y2="16.2"/></svg>
+      <input id="buscar" type="search" placeholder="Buscar un acceso…" autocomplete="off" spellcheck="false" aria-label="Buscar un acceso">
+      <span class="kbd" aria-hidden="true">/</span>
+    </div>
+    <p class="hint" id="hint" aria-live="polite"></p>
 
-    <script>
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
+    <section id="sec-favoritos" hidden>
+      <div class="section-head">
+        <h2>Favoritos</h2>
+        <span class="count" id="count-favoritos"></span>
+      </div>
+      <ul class="grid" id="grid-favoritos"></ul>
+    </section>
 
-        function sortCardsAlphabetically() {
-            const grid = document.querySelector('.grid');
-            const cards = Array.from(grid.children);
-            
-            cards.sort((a, b) => {
-                const textA = a.querySelector('a').textContent.trim().toUpperCase();
-                const textB = b.querySelector('a').textContent.trim().toUpperCase();
-                return textA.localeCompare(textB);
-            });
-            
-            cards.forEach(card => grid.appendChild(card));
-        }
+    <section>
+      <div class="section-head">
+        <h2>Todos los accesos</h2>
+        <span class="count" id="count-todos"></span>
+      </div>
+      <ul class="grid" id="grid-todos"></ul>
+      <div class="empty" id="vacio" hidden></div>
+    </section>
+  </main>
 
-        window.addEventListener('load', sortCardsAlphabetically);
-    </script>
+  <footer>
+    <div class="wrap">
+      <p style="margin:0">Desarrollo Informática de Fiscalía de Estado de Neuquén</p>
+      <span>Tocá la ☆ para marcar favoritos</span>
+    </div>
+  </footer>
+
+<script>
+  const ICONOS = {
+    doc: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
+    maletin: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="2" y1="13" x2="22" y2="13"/>',
+    recibo: '<path d="M5 2v20l2.5-1.5L10 22l2-1.5 2 1.5 2.5-1.5L19 22V2l-2.5 1.5L14 2l-2 1.5L10 2 7.5 3.5z"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>',
+    calculadora: '<rect x="5" y="2" width="14" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/>',
+    reloj: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+    mapa: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+    candado: '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+    lupa: '<circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.2" y2="16.2"/>',
+    correo: '<rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 6 12 13 2 6"/>',
+    pdf: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>',
+    persona: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+    sueldo: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>',
+    ingresar: '<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>',
+    capas: '<path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/>',
+    casa: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+    escudo: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+    mundo: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+    peso: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+    chat: '<path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/>',
+    descarga: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+    birrete: '<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/><line x1="22" y1="10" x2="22" y2="15"/>',
+    balanza: '<line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/><path d="M5 7 2 14a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/>',
+  };
+  const ESTRELLA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg>';
+
+  // ---------- Almacenamiento seguro (puede fallar en modo privado) ----------
+  const guardar = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+  const leer = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+
+  // ---------- Tema ----------
+  const botonesTema = document.querySelectorAll('.theme button');
+  function aplicarTema(tema) {
+    if (tema === 'claro') document.documentElement.dataset.theme = 'light';
+    else if (tema === 'oscuro') document.documentElement.dataset.theme = 'dark';
+    else delete document.documentElement.dataset.theme;
+    botonesTema.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tema === tema)));
+  }
+  botonesTema.forEach(b => b.addEventListener('click', () => {
+    guardar('fe-tema', b.dataset.tema);
+    aplicarTema(b.dataset.tema);
+  }));
+  aplicarTema(leer('fe-tema') || 'auto');
+
+  // ---------- Datos ----------
+  const normalizar = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const escapar = (s) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const dominio = (url) => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return url; } };
+
+  const accesos = ACCESOS
+    .map(a => ({ ...a, dominio: dominio(a.url), clave: normalizar(a.nombre + ' ' + dominio(a.url)) }))
+    .sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' }));
+
+  let favoritos;
+  try { favoritos = new Set(JSON.parse(leer('fe-favoritos') || '[]')); } catch (e) { favoritos = new Set(); }
+
+  // ---------- Render ----------
+  const $buscar = document.getElementById('buscar');
+  const $hint = document.getElementById('hint');
+  const $gridTodos = document.getElementById('grid-todos');
+  const $gridFav = document.getElementById('grid-favoritos');
+  const $secFav = document.getElementById('sec-favoritos');
+  const $vacio = document.getElementById('vacio');
+
+  function resaltar(texto, consulta) {
+    if (!consulta) return escapar(texto);
+    const i = normalizar(texto).indexOf(consulta);
+    if (i < 0) return escapar(texto);
+    return escapar(texto.slice(0, i)) + '<mark>' + escapar(texto.slice(i, i + consulta.length)) + '</mark>' + escapar(texto.slice(i + consulta.length));
+  }
+
+  function tarjeta(a, consulta) {
+    const fav = favoritos.has(a.url);
+    const attrs = a.descarga ? 'download' : 'target="_blank" rel="noopener noreferrer"';
+    return `<li class="card">
+      <a href="${escapar(a.url)}" ${attrs}>
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONOS[a.icono] || ICONOS.doc}</svg></span>
+        <span class="text">
+          <span class="name">${resaltar(a.nombre, consulta)}${a.descarga ? '<span class="tag">Descarga</span>' : ''}</span>
+          <span class="domain">${resaltar(a.dominio, consulta)}</span>
+        </span>
+      </a>
+      <button type="button" class="star" data-url="${escapar(a.url)}" aria-pressed="${fav}" aria-label="${fav ? 'Quitar de' : 'Agregar a'} favoritos: ${escapar(a.nombre)}" title="${fav ? 'Quitar de favoritos' : 'Agregar a favoritos'}">${ESTRELLA}</button>
+    </li>`;
+  }
+
+  function render() {
+    const consulta = normalizar($buscar.value.trim());
+    const visibles = consulta ? accesos.filter(a => a.clave.includes(consulta)) : accesos;
+    const favs = accesos.filter(a => favoritos.has(a.url));
+
+    // Favoritos se ocultan mientras se busca, para que los resultados queden en una sola lista
+    $secFav.hidden = consulta !== '' || favs.length === 0;
+    $gridFav.innerHTML = favs.map(a => tarjeta(a, '')).join('');
+    document.getElementById('count-favoritos').textContent = favs.length;
+
+    $gridTodos.innerHTML = visibles.map(a => tarjeta(a, consulta)).join('');
+    document.getElementById('count-todos').textContent = consulta ? `${visibles.length} de ${accesos.length}` : accesos.length;
+
+    $vacio.hidden = visibles.length > 0;
+    if (!visibles.length) $vacio.textContent = `No hay accesos que coincidan con «${$buscar.value.trim()}».`;
+
+    if (consulta && visibles.length) {
+      $gridTodos.firstElementChild.classList.add('first');
+      $hint.textContent = `Enter abre «${visibles[0].nombre}» · Esc limpia la búsqueda`;
+    } else {
+      $hint.textContent = consulta ? '' : 'Escribí para filtrar · tecla / para buscar desde cualquier lugar';
+    }
+  }
+
+  // ---------- Eventos ----------
+  $buscar.addEventListener('input', render);
+  $buscar.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const primero = $gridTodos.querySelector('.card a');
+      if ($buscar.value.trim() && primero) primero.click();
+    } else if (e.key === 'Escape') {
+      $buscar.value = '';
+      render();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== $buscar && !e.ctrlKey && !e.metaKey) {
+      e.preventDefault();
+      $buscar.focus();
+      $buscar.select();
+    }
+  });
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.star');
+    if (!btn) return;
+    const url = btn.dataset.url;
+    favoritos.has(url) ? favoritos.delete(url) : favoritos.add(url);
+    guardar('fe-favoritos', JSON.stringify([...favoritos]));
+    render();
+  });
+
+  render();
+</script>
 </body>
 </html>
