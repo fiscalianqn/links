@@ -14,7 +14,7 @@
 /* =====================================================================
    LISTA DE ACCESOS
    Para agregar uno nuevo, copiá una línea y cambiá los datos.
-   - nombre: texto de la tarjeta
+   - nombre: texto de la tarjeta (\n fuerza un salto de renglón)
    - url:    dirección completa
    - icono:  uno de: doc, maletin, recibo, calculadora, reloj, mapa, candado,
              lupa, correo, pdf, persona, sueldo, ingresar, capas, casa,
@@ -23,7 +23,8 @@
    El orden no importa: la página los ordena alfabéticamente sola.
    ===================================================================== */
 const ACCESOS = [
-  { nombre: "COLEGIO DE ABOGADOS – TASAS", url: "https://abognqn.org/tasas-y-aportes/", icono: "maletin" },
+  { nombre: "COL. ABOGADOS\nTASAS", url: "https://abognqn.org/tasas-y-aportes/", icono: "maletin" },
+  { nombre: "COL. ABOGADOS\nSIMULADOR JUS", url: "https://gestion.abognqn.org/index.php/CRM_simulador_honorarios_jus", icono: "calculadora" },
   { nombre: "ARCA (EX AFIP) – CONSTANCIA", url: "https://seti.afip.gob.ar/padron-puc-constancia-internet/ConsultaConstanciaAction.do", icono: "recibo" },
   { nombre: "CALCULO INTERESES RENTA", url: "https://rentasneuquenweb.gob.ar/nqn/SCF/cal_interes.php", icono: "calculadora" },
   { nombre: "CALCULO DE INTERESES", url: "https://cintereses.agjusneuquen.gob.ar/", icono: "reloj" },
@@ -37,7 +38,7 @@ const ACCESOS = [
   { nombre: "MIS LICENCIAS Y RECIBOS DE SUELDOS", url: "https://mislicencias.economianqn.gob.ar/#/auth/login", icono: "sueldo" },
   { nombre: "ONE LOGIN", url: "https://cas.neuquen.gov.ar/cas/login?service=https%3a%2f%2flogin.neuquen.gov.ar%2f", icono: "ingresar" },
   { nombre: "PODER JUDICIAL DE LA NACION", url: "https://pjn.gov.ar", icono: "capas" },
-  { nombre: "ISSN - OFICINA VIRTUAL", url: "https://auth.issn.gov.ar/auth/realms/ISSN/protocol/openid-connect/auth?response_type=code&client_id=sau-externos&redirect_uri=https://sau.issn.gov.ar/externos", icono: "ingresar" },
+  { nombre: "ISSN\nOFICINA VIRTUAL", url: "https://auth.issn.gov.ar/auth/realms/ISSN/protocol/openid-connect/auth?response_type=code&client_id=sau-externos&redirect_uri=https://sau.issn.gov.ar/externos", icono: "ingresar" },
   { nombre: "REGISTRO DE LA PROPIEDAD INMUEBLE", url: "https://www.jusneuquen.gov.ar/rpi/", icono: "casa" },
   { nombre: "RIESGO ON LINE", url: "https://www.riesgoonline.com/#/home", icono: "escudo" },
   { nombre: "SINATRA", url: "https://rentasneuquenweb.gob.ar/nqn/Extranet/index.php", icono: "mundo" },
@@ -348,6 +349,7 @@ const ACCESOS = [
   .text { min-width: 0; }
   .name {
     display: block;
+    white-space: pre-line;
     font-weight: 600;
     font-size: 13.5px;
     letter-spacing: .015em;
@@ -545,7 +547,7 @@ const ACCESOS = [
   const dominio = (url) => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return url; } };
 
   const accesos = ACCESOS
-    .map(a => ({ ...a, dominio: dominio(a.url), clave: normalizar(a.nombre + ' ' + dominio(a.url)) }))
+    .map(a => ({ ...a, dominio: dominio(a.url), clave: normalizar(a.nombre.replace(/\n/g, ' ') + ' ' + dominio(a.url)) }))
     .sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' }));
 
   let favoritos;
